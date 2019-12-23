@@ -1,0 +1,24 @@
+{
+  "name": "git-playground",
+  "version": "1.0.0",
+  "description": "🤸‍♀️ 🤸‍♂️",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "release-it": "^12.4.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "release-it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ParkSB/git-playground.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ParkSB/git-playground/issues"
+  },
+  "homepage": "https://github.com/ParkSB/git-playground#readme"
+}
