@@ -26,7 +26,7 @@ git checkout --detach
 
 sed -i "" "/dist/d" ./.gitignore
 
-git add dist
+git add .
 git commit -m "dist"
 
 npm version $SEMVER
