@@ -22,11 +22,13 @@ fi
 
 git checkout --detach
 
-npm run build
+# npm run build
 
 sed -i "" "/dist/d" ./.gitignore
 
 git add dist
+git commit -m "dist"
+
 npm version $SEMVER
 git push --tags
 
