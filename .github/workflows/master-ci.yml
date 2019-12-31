@@ -25,4 +25,6 @@ jobs:
       env:
         CI: true
     - name: build and release
-      run: sh ./tools/test.sh
+      run: |
+        sh ./tools/test.sh
+        sh ./tools/release.sh
