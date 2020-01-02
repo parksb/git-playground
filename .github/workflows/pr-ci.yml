@@ -1,0 +1,22 @@
+on:
+  pull_request:
+    branches:
+      - master
+
+name: pr-ci
+
+jobs:
+  build:
+    name: pr-ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Add tag
+        run: |
+          git config --global user.name 'Park Seong-beom'
+          git config --global user.email 'parkgds@gmail.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ParkSB/git-playground
+          npm version --no-git-tag patch
+          git commit -m "test"
+          git push origin
