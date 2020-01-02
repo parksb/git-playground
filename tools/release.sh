@@ -8,7 +8,7 @@ if [[ -z "$SEMVER" ]]; then
     SEMVER=$(echo $PREFIX | sed 's/.\{1\}$//')
   else
     echo "Exit! ${PREFIX}"
-    exit 2
+    exit 0
   fi
 elif [[ $SEMVER != "patch" ]] && [[ $SEMVER != "minor" ]] && [[ $SEMVER != "major" ]]; then
   echo ''
