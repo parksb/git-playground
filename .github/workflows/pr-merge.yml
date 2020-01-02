@@ -1,0 +1,21 @@
+name: CI
+
+on: [pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Pull request merged
+      if: github.action == 'closed' && github.pull_request.merged == 'true'
+      run: |
+        git config --global user.name 'Park Seong-beom'
+        git config --global user.email 'parkgds@gmail.com'
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ParkSB/git-playground
+        mkdir test
+        "test" > test/test_code
+        git add .
+        git commit -m "Add test file"
+        git push origin
