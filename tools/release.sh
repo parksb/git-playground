@@ -34,7 +34,11 @@ git checkout --detach
 mkdir dist
 echo "dist" > dist/file.dist
 
-sed -i "" "/dist/d" ./.gitignore
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' '/dist/d' ./.gitignore
+else
+  sed -i '/dist/d' ./.gitignore
+fi
 
 git add .
 git commit -m "dist: $(date +'%Y-%m-%d %H:%M:%S')"
