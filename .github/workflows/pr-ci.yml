@@ -12,11 +12,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
       - name: Add tag
         run: |
           git config --global user.name 'Park Seong-beom'
           git config --global user.email 'parkgds@gmail.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ParkSB/git-playground
           npm version --no-git-tag patch
-          git commit -m "test"
+          git add .
+          git commit -m "$(awk '/version/{gsub(/("|",)/,"",$2);print $2};' package.json)"
           git push origin
