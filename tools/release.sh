@@ -31,6 +31,9 @@ git checkout --detach
 
 # npm run build
 
+mkdir dist
+echo "dist" > dist/file.dist
+
 sed -i "" "/dist/d" ./.gitignore
 
 git add .
