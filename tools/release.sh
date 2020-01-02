@@ -44,7 +44,7 @@ git add .
 git commit -m "dist: $(date +'%Y-%m-%d %H:%M:%S')"
 
 npm version $SEMVER
-git push --tags
+git push origin --tags
 
 git restore ./.gitignore
 git switch master
