@@ -10,10 +10,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [8.x, 10.x]
-
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
@@ -28,6 +24,8 @@ jobs:
       run: |
         git config --global user.name 'Park Seong-beom'
         git config --global user.email 'parkgds@gmail.com'
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-        sh ./tools/test.sh
-        sh ./tools/release.sh
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ParkSB/git-playground
+        sudo apt-get update
+        sudo apt-get install bash
+        bash ./tools/test.sh
+        bash ./tools/release.sh
