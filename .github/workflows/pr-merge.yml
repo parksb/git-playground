@@ -1,9 +1,6 @@
 name: CI
 
-on:
-  pull_request:
-    branches:
-      - master
+on: [pull_request]
 
 jobs:
   build:
@@ -11,14 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm ci
-      run: npm ci
-      env:
-        CI: true
-    - name: build and release
-      run: echo "Merge PR"
+    - name: Pull request merged
+      if: github.action == 'closed' && github.pull_request.merged == 'true'
+      run: echo merged
