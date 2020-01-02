@@ -27,3 +27,5 @@ jobs:
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ParkSB/git-playground
         bash ./tools/test.sh
         bash ./tools/release.sh
+        sudo snap install hub --classic
+        hub release create v3.0.0
