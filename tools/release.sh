@@ -1,16 +1,8 @@
 #!/bin/bash
 
 SEMVER=$1
-PREFIX=$(git show --pretty=format:%s -s origin/master | egrep -o '^[a-z]*:')
 
-if [[ -z "$SEMVER" ]]; then
-  if [[ $PREFIX == "patch:" ]] || [[ $PREFIX == "minor:" ]] || [[ $PREFIX == "major:" ]]; then
-    SEMVER=$(echo $PREFIX | sed 's/.\{1\}$//')
-  else
-    echo "Exit! ${PREFIX}"
-    exit 0
-  fi
-elif [[ $SEMVER != "patch" ]] && [[ $SEMVER != "minor" ]] && [[ $SEMVER != "major" ]]; then
+if [ $SEMVER ] && [[ $SEMVER != "patch" ]] && [[ $SEMVER != "minor" ]] && [[ $SEMVER != "major" ]]; then
   echo ''
   echo 'Please run with semver parameter.'
   echo ''
@@ -30,8 +22,6 @@ fi
 
 git checkout --detach
 
-# npm run build
-
 mkdir dist
 echo "dist" > dist/file.dist
 
@@ -44,7 +34,8 @@ fi
 git add .
 git commit -m "dist: $(date +'%Y-%m-%d %H:%M:%S')"
 
-npm version $SEMVER
+VERSION=$(awk '/version/{gsub(/("|",)/,"",$2);print $2};' package.json)
+git tag v$VERSION
 git push origin --tags
 
 git restore ./.gitignore
