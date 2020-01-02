@@ -26,5 +26,8 @@ jobs:
         CI: true
     - name: build and release
       run: |
+        git config --global user.name 'Park Seong-beom'
+        git config --global user.email 'parkgds@gmail.com'
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
         sh ./tools/test.sh
         sh ./tools/release.sh
