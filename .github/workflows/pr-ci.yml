@@ -6,7 +6,7 @@ on:
 name: pr-ci
 
 jobs:
-  build:
+  test:
     name: pr-ci
     runs-on: ubuntu-latest
     steps:
