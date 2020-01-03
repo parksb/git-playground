@@ -24,7 +24,7 @@ jobs:
       run: |
         VERSION=$(awk '/version/{gsub(/("|",)/,"",$2);print $2};' package.json)
         if git rev-parse v$VERSION >/dev/null 2>&1; then
-        echo "tag 'v${VERSION}' already exists"
+        echo "tag 'v$VERSION' already exists"
         else
         git config --global user.name 'ParkSB'
         git config --global user.email 'parkgds@gmail.com'
