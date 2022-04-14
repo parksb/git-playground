@@ -13,10 +13,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Add D-Day Label to PRs
         run: |
-          PR_LIST=$(gh pr list --json number,title,createdAt)
-          DDAY_PR_ID_LIST=$(echo $PR_LIST | jq --arg NOW "$(date +%s)" 'map(. | { "n": .number, "d": ((.createdAt | fromdateiso8601) + (.title | match("\\(D-(\\d*)\\)$").captures[0].string | tonumber | (. - 1) * 86400) < ($NOW | tonumber)) }) | .[] | select(.d == true) | .n')
-          echo $DDAY_PR_ID_LIST
-          for PR_ID in $DDAY_PR_ID_LIST; do
+          PR_LIST=$(gh pr list --json number,title,labels,createdAt)
+          PR_ID_LIST=$(echo $PR_LIST | jq --arg NOW "$(date +%s)" 'map({ "n": .number, "d": ((.createdAt | fromdateiso8601) + (.title | match("\\(D-(\\d*)\\)$").captures[0].string | tonumber | (. - 1) * 86400) < ($NOW | tonumber)), "l": .labels | any(.name == "d-day") }) | .[] | select(.d == true and .l == false) | .n')
+          echo $PR_ID_LIST
+          for PR_ID in $PR_ID_LIST; do
             gh pr edit $PR_ID --add-label "d-day"
             sleep 1s
           done
