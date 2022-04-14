@@ -14,6 +14,7 @@ jobs:
       - name: Add D-Day Label to PRs
         run: |
           PR_LIST=$(gh pr list --json number,title,createdAt)
+          jq --version
           echo $PR_LIST
           DDAY_PR_ID_LIST=$(echo $PRLIST | jq --arg NOW "$(date +%s)" 'map(. | { "n": .number, "d": ((.createdAt | fromdateiso8601) + (.title | match("\\(D-(\\d*)\\)$").captures[0].string | tonumber | (. - 1) * 86400) < ($NOW | tonumber)) }) | .[] | select(.d == true) | .n | tostring')
           echo $DDAY_PR_ID_LIST
