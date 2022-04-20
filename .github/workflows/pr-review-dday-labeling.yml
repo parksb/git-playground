@@ -2,8 +2,6 @@ name: PR Review D-Day Labeling
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 1 * * 1-5'
   pull_request:
     types: [opened, edited]
 
